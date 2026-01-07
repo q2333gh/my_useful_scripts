@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Control Windows network adapter
+Control Windows network adapter: 
+  input adapter name and action ( 0=disable, 1=enable, 2=restart)
 Requires admin
 """
 
