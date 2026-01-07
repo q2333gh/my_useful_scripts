@@ -1,32 +1,27 @@
-https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/#:~:text=The%20procedure%20to%20configure%20sudo%20without%20a%20password,5%20Save%20and%20exit%20the%20file.%20More%20items
+# Sudo Without Password
+
+## Using visudo (recommended)
 
 ```bash
-cp /etc/sudoers /root/sudoers.bak
-sudo chmod 777 /etc/sudoers 
-# give vivek sudo no need passwd
-echo 'vivek ALL = NOPASSWD: /bin/systemctl restart httpd.service, /bin/kill' >> /etc/sudoers 
-# test 
-chmod 777 xxx 
+sudo visudo
+```
 
-# maybe sudo chmod 777 /etc/sudoers  is not a good approach for production vm. local testing vm look fine ?
+Add to end of file:
 
-btwl@btwl-virtual-machine ~/D/i/tax_lint (master)> tldr visudo
-visudo
-Safely edit the sudoers file.More information: https://www.sudo.ws/docs/man/visudo.man.
+```bash
+username ALL=(ALL) NOPASSWD:ALL
+```
 
- - Edit the sudoers file:
-   sudo visudo
+Or specific commands:
 
- - Check the sudoers file for errors:
-   sudo visudo -c
+```bash
+username ALL=(ALL) NOPASSWD:/usr/bin/apt update, /usr/bin/apt upgrade
+```
 
- - Edit the sudoers file using a specific editor:
-   sudo EDITOR={{editor}} visudo
+## Commands
 
- - Display version information:
-   visudo --version
-
-
-
-
+```bash
+sudo visudo
+sudo visudo -c
+sudo EDITOR=vim visudo
 ```

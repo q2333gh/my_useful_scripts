@@ -1,11 +1,24 @@
-# config git editor :
+# Git Commands
 
+## Set editor
+
+```bash
 git config --global core.editor "vim"
-
 git config --global core.editor "code --wait"
+```
 
+## Squash commits
 
-# squash multiple commit into 1 commit 
+```bash
+git rebase -i HEAD~N
+# Change 'pick' to 'squash' for commits to merge
+```
 
-git rebase -i HEAD~11
+## Other
 
+```bash
+git log --oneline
+git reset --soft HEAD~1
+git reset --hard HEAD~1
+git commit --amend
+```

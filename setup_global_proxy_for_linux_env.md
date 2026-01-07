@@ -1,10 +1,17 @@
+# Linux Global Proxy Setup
+
+Edit `/etc/environment`:
+
+```bash
+http_proxy="http://host:port"
+https_proxy="http://host:port"
 ```
 
-btwl@btwl-virtual-machine ~/D/i/ic-master (master)> cat /etc/environment 
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-http_proxy="http://192.168.3.22:25526"
-https_proxy="http://192.168.3.22:25526"
+Relogin or reboot to apply.
+
+## Verify
+
+```bash
+env | grep -i proxy
+curl -I https://www.google.com
 ```
-by doing the proxy as so .  
-some cmd will auto use the proxy 
-such as git clone , docker pull , cargo install, 

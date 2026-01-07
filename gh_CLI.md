@@ -1,12 +1,35 @@
+# GitHub CLI
+
+## Auth
+
+```bash
 gh auth login
+```
 
+## Create repo
 
+```bash
+gh repo create <name> --private
+gh repo create <name> --public
+```
 
-<!-- new a repo: -->
-gh repo create my_ic_secret --private
-gh repo clone <owner>/<repository_name>
-gh repo clone q2333gh/rust_study.git
+## Clone
 
+```bash
+gh repo clone <owner>/<repo>
+```
 
-<!-- link to exsiting repo  -->
-<!-- TODO -->
+## Link existing repo
+
+```bash
+gh repo create <name> --public --source=. --remote=origin --push
+```
+
+## Other
+
+```bash
+gh repo view
+gh repo list
+gh issue create
+gh pr create
+```

@@ -1,23 +1,61 @@
- how to check docker container --restart  policy for all container ?
- ```
- docker ps -aq | xargs docker inspect --format '{{ .Name }}: {{ .HostConfig.RestartPolicy }}'
- ```
+# Docker Commands
 
- 
-## mew a ubuntu with name specified.
- btwl@btwl-virtual-machine ~/c/open-chat (master)> docker ps -a | grep ubuntu
-c6a2b1c712af   ubuntu                         "/bin/bash"              7 minutes ago   Up 3 minutes                         intelligent_knuth
-btwl@btwl-virtual-machine ~/c/open-chat (master)> docker rename intelligent_knuth pic_test
-btwl@btwl-virtual-machine ~/c/open-chat (master)> docker exec pic_test ls /opt/
+## Check restart policy
 
+```bash
+docker ps -aq | xargs docker inspect --format '{{ .Name }}: {{ .HostConfig.RestartPolicy }}'
+```
 
-btwl@btwl-virtual-machine ~/c/open-chat (master)> ls^C
-btwl@btwl-virtual-machine ~/c/open-chat (master)> docker cp ^C
-btwl@btwl-virtual-machine ~/c/open-chat (master)> docker cp /opt/pocket-ic pic_test:/opt/
+## Rename container
 
+```bash
+docker rename <old_name> <new_name>
+```
 
-Successfully copied 44.5MB to pic_test:/opt/
-btwl@btwl-virtual-machine ~/c/open-chat (master)> docker run -it ubuntu^C
+## Execute command in container
 
-## enable proxy in docker container ?
+```bash
+docker exec <container_name> <command>
+```
 
+## Copy file to container
+
+```bash
+docker cp <host_path> <container_name>:<container_path>
+```
+
+## Enable proxy
+
+### Environment variables
+
+```bash
+docker run -it -e http_proxy=http://host:port -e https_proxy=http://host:port ubuntu
+```
+
+### Docker config (`~/.docker/config.json`)
+
+```json
+{
+  "proxies": {
+    "default": {
+      "httpProxy": "http://host:port",
+      "httpsProxy": "http://host:port"
+    }
+  }
+}
+```
+
+### Daemon config (`/etc/docker/daemon.json`)
+
+```json
+{
+  "proxies": {
+    "http-proxy": "http://host:port",
+    "https-proxy": "http://host:port"
+  }
+}
+```
+
+```bash
+sudo systemctl restart docker
+```
